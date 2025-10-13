@@ -3,12 +3,12 @@ Phenetica is a powerful, cross-platform, standalone desktop application designed
 
 ## **Why Phenetica?**
 Phenetica bridges the gap between complex statistical methods and practical biological research, making sophisticated morphometric analyses accessible to everyone. The key features include:
-1. Cost-Free & Open Source — No licensing fees, freely available for academic and research use.
-2. Cross-Platform — Runs seamlessly on Windows (10, 11) and Linux systems.
-3. User-Friendly — Modern GUI with no coding required. Cross-Platform — Runs seamlessly on Windows (10, 11) and Linux systems.
-4. Comprehensive — Multiple analysis methods in one integrated tool.
-5. Publication-Ready — High-quality visualizations suitable for scientific publications.
-6. Efficient — Automated workflow from data input to results generation
+**1. Cost-Free & Open Source** — No licensing fees, freely available for academic and research use.
+**2. Cross-Platform** — Runs seamlessly on Windows (10, 11) and Linux systems.
+**3. User-Friendly** — Modern GUI with no coding required. Cross-Platform — Runs seamlessly on Windows (10, 11) and Linux systems.
+**4. Comprehensive** — Multiple analysis methods in one integrated tool.
+**5. Publication-Ready** — High-quality visualizations suitable for scientific publications.
+**6. Efficient** — Automated workflow from data input to results generation.
 
 
 ✨ Features
