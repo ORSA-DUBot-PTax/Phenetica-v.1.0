@@ -11,83 +11,33 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 6. **Efficient** — Automated workflow from data input to results generation.
 
 ## **✨ Features**
-📊 Similarity Analysis
 
-Simple Matching Coefficient (SMC) — Quantifies overall similarity between taxa
-Jaccard Similarity Index — Measures similarity based on shared presence of characters
-Exports similarity matrices in CSV format for further analysis
+###**📊 Similarity Analysis**
+1. Simple Matching Coefficient (SMC) — Quantifies overall similarity between taxa.
+2. Jaccard Similarity Index — Measures similarity based on shared presence of characters.
+3. Exports similarity matrices in CSV format for further analysis.
 
-🌳 Hierarchical Clustering
+###**🌳 Hierarchical Clustering**
+1. UPGMA Dendrogram — Unweighted Pair Group Method with Arithmetic Mean (average linkage).
+2. Alternative Clustering Methods — Single linkage, complete linkage, and Ward's method.
+3. Publication-quality dendrograms.
+4. Automatic label sizing based on dataset complexity.
 
-UPGMA Dendrogram — Unweighted Pair Group Method with Arithmetic Mean (average linkage)
-Alternative Clustering Methods — Single linkage, complete linkage, and Ward's method
-Publication-quality dendrograms with customizable layouts
-Automatic label sizing based on dataset complexity
+###**📈 Ordination Methods**
+1. Principal Component Analysis (PCA).
+2. Non-metric Multidimensional Scaling (NMDS).
+3. UMAP (Uniform Manifold Approximation and Projection).
+4. t-SNE (t-Distributed Stochastic Neighbor Embedding).
 
-📈 Ordination Methods
-Principal Component Analysis (PCA)
+###**🔥 Data Visualization**
+1. Similarity Heatmap — Color-coded matrix showing relationships between all taxa.
+2. Scatter Plots — Labeled data points with distinct colors per analysis.
+3. Dendrograms — Multiple clustering visualizations with adjustable aesthetics.
 
-2D and 3D scatter plots with variance explained
-Scree plot for eigenvalue visualization
-Character loadings table for trait contribution analysis
-Cumulative variance table
+###**💾 Output Management**
 
-Non-metric Multidimensional Scaling (NMDS)
-
-2D and 3D ordination plots
-Stress value calculation and stress plot
-Optimal dimensionality assessment
-
-UMAP (Uniform Manifold Approximation and Projection)
-
-2D and 3D embeddings for complex data visualization
-Superior preservation of both local and global structure
-Optional feature (requires umap-learn package)
-
-t-SNE (t-Distributed Stochastic Neighbor Embedding)
-
-2D and 3D visualizations for high-dimensional data
-Excellent for revealing cluster structures
-Configurable perplexity parameters
-
-🔥 Data Visualization
-
-Similarity Heatmaps — Color-coded matrices showing relationships between all taxa
-Interactive Scatter Plots — Labeled data points with distinct colors per analysis
-Dendrograms — Multiple clustering visualizations with adjustable aesthetics
-High-Resolution Exports — 300 DPI PNG images suitable for publication
-
-🎯 Smart Features
-
-Automatic Delimiter Detection — Handles comma, tab, and other delimiters
-Adaptive Scaling — Font sizes and plot dimensions adjust automatically based on dataset size
-Progress Tracking — Real-time progress bar and detailed logging
-Batch Processing — Select multiple analyses to run in sequence
-Error Handling — Robust error management with informative messages
-
-💾 Output Management
-
-All results saved in organized outputs/ folder
-CSV files for numerical results (matrices, eigenvalues, loadings, clusters)
-PNG files for all visualizations
-Timestamped analysis logs
-Taxa cluster summary for easy interpretation
-
-🎨 Modern User Interface
-
-Clean, professional design with intuitive layout
-Color-coded analysis options with emoji indicators
-Responsive controls and real-time feedback
-Enhanced splash screen with branding
-Dark-themed console log for easy reading
+1. All results saved in organized outputs/ folder.
+2. CSV files for numerical results (matrices, eigenvalues, loadings, clusters).
+3. PNG files for all visualizations.
 
 
-🎯 Target Applications
-Phenetica is ideal for:
-
-🌱 Taxonomic Studies — Species delimitation and classification
-🧬 Evolutionary Biology — Phylogenetic relationship exploration
-🔬 Morphological Research — Character trait analysis across organisms
-📚 Educational Purposes — Teaching multivariate statistics and taxonomy
-🌿 Botanical Research — Plant morphometric analysis and systematics
-🦋 Zoological Studies — Animal morphology and comparative anatomy
