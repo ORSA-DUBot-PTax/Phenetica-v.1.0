@@ -10,8 +10,7 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 5. **Publication-Ready** — High-quality visualizations suitable for scientific publications.
 6. **Efficient** — Automated workflow from data input to results generation.
 
-
-✨ Features
+## **✨ Features**
 📊 Similarity Analysis
 
 Simple Matching Coefficient (SMC) — Quantifies overall similarity between taxa
