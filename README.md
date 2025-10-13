@@ -17,25 +17,24 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 2. Jaccard Similarity Index — Measures similarity based on shared presence of characters.
 3. Exports similarity matrices in CSV format for further analysis.
 
-###**🌳 Hierarchical Clustering**
+🌳**Hierarchical Clustering**
 1. UPGMA Dendrogram — Unweighted Pair Group Method with Arithmetic Mean (average linkage).
 2. Alternative Clustering Methods — Single linkage, complete linkage, and Ward's method.
 3. Publication-quality dendrograms.
 4. Automatic label sizing based on dataset complexity.
 
-###**📈 Ordination Methods**
+📈**Ordination Methods**
 1. Principal Component Analysis (PCA).
 2. Non-metric Multidimensional Scaling (NMDS).
 3. UMAP (Uniform Manifold Approximation and Projection).
 4. t-SNE (t-Distributed Stochastic Neighbor Embedding).
 
-###**🔥 Data Visualization**
+🔥**Data Visualization**
 1. Similarity Heatmap — Color-coded matrix showing relationships between all taxa.
 2. Scatter Plots — Labeled data points with distinct colors per analysis.
 3. Dendrograms — Multiple clustering visualizations with adjustable aesthetics.
 
-###**💾 Output Management**
-
+💾**Output Management**
 1. All results saved in organized outputs/ folder.
 2. CSV files for numerical results (matrices, eigenvalues, loadings, clusters).
 3. PNG files for all visualizations.
