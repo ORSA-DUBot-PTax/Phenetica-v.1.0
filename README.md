@@ -39,10 +39,32 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 2. CSV files for numerical results (matrices, eigenvalues, loadings, clusters).
 3. PNG files for all visualizations.
 
+##Installation
+
+**Windows**
+
+Recommended OS: Windows 10/11
+
+Please download the EXE file from **https://doi.org/10.5281/zenodo.17342782**, double click and enjoy!
+
+**Linux**
+
+Before beginning, download the full repository from GitHub by clicking the green Code button and selecting Download ZIP. After the download is complete, extract the ZIP file to a location of your choice—moving it to your home directory is recommended for convenience. Once extracted, open a terminal and navigate to the project folder. From there, you can begin the setup by first installing Conda (if it’s not already installed), then creating a dedicated environment and installing the necessary dependencies by executing the commands as outlined below.
+
+1. `conda create -n phenetica python=3.9 -y && \`
+2. `conda activate phenetica && \`
+3. `conda install numpy pandas matplotlib seaborn scipy scikit-learn -y && \`
+4. `pip install umap-learn && \`
+5. `python Phenetica_1.0.py`
+
+After successful installation and execution, the GUI will appear as outlined below:
+
+IMAGE
+
 ## Input Structure
 Phenetica accepts a CSV file containing morphological or binary trait data. Each row represents a character, and each column represents a taxon.
 
-A binary data matrix is needed first that can be prepared from contrasting characters for the selected species. An example is given below with species (in the column) and characters (in the row):
+A binary data matrix is needed that can be prepared from contrasting characters for the selected species. An example is given below with species (in the column) and characters (in the row):
 
 
 **Character encoding**
