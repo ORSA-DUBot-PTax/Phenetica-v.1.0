@@ -43,7 +43,11 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 Phenetica accepts a CSV file containing morphological or binary trait data. Each row represents a character, and each column represents a taxon.
 
 A binary data matrix is needed first that can be prepared from contrasting characters for the selected species. An example is given below with species (in the column) and characters (in the row):
+
+
 **Character encoding**
+
+
 ```
 Species						
 Characters	F. colorata	F. simplex	H. fomes	H. littoralis	H. macrophylla	H. papilio
@@ -52,7 +56,9 @@ Leaf (Simple (0)/Compound (1))	Simple	Simple	Simple	Simple	Simple	Simple
 Leaf lobe  (Present (1)/Absent (0))	Present	Present	Absent	Absent	Absent	Absent
 
 ```
+
 **Software input**
+
 After encoding the contrasting characters into binary states, a CSV file should be prepared for uploading into Phenetica.
 
 Example format:
