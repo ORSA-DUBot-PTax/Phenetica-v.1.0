@@ -58,7 +58,7 @@ This project is licensed under the MIT license.
 ## Developers
 Sheikh Sunzid Ahmed & M. Oliur Rahman.
 
-Plant Taxonomy and Ethnobotany Laboratory, Department of Botany, University of Dhaka
+Plant Taxonomy and Ethnobotany Laboratory, Department of Botany, University of Dhaka.
 
 ## Contact
 If you have any questions, feedback, or issues, please don't hesitate to contact us at-
