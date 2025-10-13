@@ -1,5 +1,5 @@
 # **Phenetica v.1.0**
-Phenetica is a powerful, cross-platform, standalone desktop application designed for comprehensive morphometric analysis of biological data using binary character traits. Built with modern Python technologies, Phenetica provides taxonomists with an intuitive graphical interface for performing advanced statistical analyses without the need for programming knowledge.
+Phenetica is a powerful, cross-platform, standalone desktop application designed for comprehensive morphometric analysis of biological data using binary character traits. Built with modern Python technologies, Phenetica provides taxonomists and researchers with an intuitive graphical interface for performing advanced statistical analyses without the need for programming knowledge.
 
 ## **Why Phenetica?**
 Phenetica bridges the gap between complex statistical methods and practical biological research, making sophisticated morphometric analyses accessible to everyone. The key features include:
