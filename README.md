@@ -12,7 +12,7 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 
 ## **✨ Features**
 
-📊###** Similarity Analysis**
+📊**Similarity Analysis**
 1. Simple Matching Coefficient (SMC) — Quantifies overall similarity between taxa.
 2. Jaccard Similarity Index — Measures similarity based on shared presence of characters.
 3. Exports similarity matrices in CSV format for further analysis.
