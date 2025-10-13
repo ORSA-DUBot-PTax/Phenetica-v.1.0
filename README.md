@@ -49,6 +49,7 @@ Fco	Fsi	Hfo	Hli	Hma	Hpa
 1	1	0	0	0	0
 ```
 **Analysis Options**
-After uploading your CSV, please select one or multiple analyses using the provided checkboxes and click on the “Run selected analyses” button to execute all chosen analyses in a single step.
+1. After uploading your CSV, please select one or multiple analyses using the provided checkboxes.
+2. Click on the **“Run selected analyses”** button to execute all chosen analyses in a single step.
 
 
