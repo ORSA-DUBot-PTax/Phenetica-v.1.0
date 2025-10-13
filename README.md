@@ -39,7 +39,7 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 2. CSV files for numerical results (matrices, eigenvalues, loadings, clusters).
 3. PNG files for all visualizations.
 
-##Installation
+## Installation
 
 **Windows**
 
