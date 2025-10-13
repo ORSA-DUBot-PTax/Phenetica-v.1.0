@@ -2,14 +2,14 @@
 Phenetica is a powerful, cross-platform, standalone desktop application designed for comprehensive morphometric analysis of biological data using binary character traits. Built with modern Python technologies, Phenetica provides taxonomists with an intuitive graphical interface for performing advanced statistical analyses without the need for programming knowledge.
 
 ## **Why Phenetica?**
-✅ Cost-Free & Open Source — No licensing fees, freely available for academic and research use
-✅ Cross-Platform — Runs seamlessly on Windows (10, 11) and Linux systems
-✅ User-Friendly — Modern GUI with no coding required
-✅ Comprehensive — Multiple analysis methods in one integrated tool
-✅ Publication-Ready — High-quality visualizations suitable for scientific publications
-✅ Efficient — Automated workflow from data input to results generation
+Phenetica bridges the gap between complex statistical methods and practical biological research, making sophisticated morphometric analyses accessible to everyone. The key features include:
+1. Cost-Free & Open Source — No licensing fees, freely available for academic and research use.
+2. Cross-Platform — Runs seamlessly on Windows (10, 11) and Linux systems.
+3. User-Friendly — Modern GUI with no coding required. Cross-Platform — Runs seamlessly on Windows (10, 11) and Linux systems.
+4. Comprehensive — Multiple analysis methods in one integrated tool.
+5. Publication-Ready — High-quality visualizations suitable for scientific publications.
+6. Efficient — Automated workflow from data input to results generation
 
-Phenetica bridges the gap between complex statistical methods and practical biological research, making sophisticated morphometric analyses accessible to everyone.
 
 ✨ Features
 📊 Similarity Analysis
