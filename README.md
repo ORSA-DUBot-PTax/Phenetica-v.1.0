@@ -59,7 +59,9 @@ Before beginning, download the full repository from GitHub by clicking the green
 
 After successful installation and execution, the GUI will appear as outlined below:
 
-IMAGE
+<p align="center">
+  <img src="Phenetica.jpg" alt="Phenetica Logo" width="400"/>
+</p>
 
 ## Input Structure
 Phenetica accepts a CSV file containing morphological or binary trait data. Each row represents a character, and each column represents a taxon.
