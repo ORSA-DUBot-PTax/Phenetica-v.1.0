@@ -56,7 +56,7 @@ Fco	Fsi	Hfo	Hli	Hma	Hpa
 This project is licensed under the MIT license.
 
 ## Developers
-Sheikh Sunzid Ahmed & M. Oliur Rahman
+Sheikh Sunzid Ahmed & M. Oliur Rahman.
 Plant Taxonomy and Ethnobotany Laboratory, Department of Botany, University of Dhaka
 
 ## Contact
