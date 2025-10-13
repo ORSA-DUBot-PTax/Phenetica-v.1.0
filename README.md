@@ -39,4 +39,16 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 2. CSV files for numerical results (matrices, eigenvalues, loadings, clusters).
 3. PNG files for all visualizations.
 
+## Input Structure
+Phenetica accepts a CSV file containing morphological or binary trait data. Each row represents a character, and each column represents a taxon.
+Example format:
+```
+Fco	Fsi	Hfo	Hli	Hma	Hpa
+1	1	1	1	1	1
+0	0	0	0	0	0
+1	1	0	0	0	0
+```
+**Analysis Options**
+After uploading your CSV, please select one or multiple analyses using the provided checkboxes and click on the “Run selected analyses” button to execute all chosen analyses in a single step.
+
 
