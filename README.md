@@ -52,4 +52,13 @@ Fco	Fsi	Hfo	Hli	Hma	Hpa
 1. After uploading your CSV, please select one or multiple analyses using the provided checkboxes.
 2. Click on the **“Run selected analyses”** button to execute all chosen analyses in a single step.
 
+## License
+This project is licensed under the MIT license.
 
+## Developers
+Sheikh Sunzid Ahmed & M. Oliur Rahman
+Plant Taxonomy and Ethnobotany Laboratory, University of Dhaka
+
+## Contact
+If you have any questions, feedback, or issues, please don't hesitate to contact us at-
+oliur.bot@du.ac.bd || sunzid79@gmail.com
