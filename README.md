@@ -45,7 +45,7 @@ Phenetica bridges the gap between complex statistical methods and practical biol
 
 Recommended OS: Windows 10/11
 
-Please download the EXE file from **https://doi.org/10.5281/zenodo.17342782**, double click and enjoy!
+Please download the EXE file from **https://doi.org/10.5281/zenodo.17371975**, double click and enjoy!
 
 Alternate download link (MEGA): https://tinyurl.com/3jhphbtn
 
