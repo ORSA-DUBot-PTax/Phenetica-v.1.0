@@ -85,15 +85,17 @@ Leaf lobe  (Present (1)/Absent (0))	Present	Present	Absent	Absent	Absent	Absent
 
 **Software input**
 
-After encoding the contrasting characters into binary states, a CSV file should be prepared for uploading into Phenetica.
+After encoding the contrasting characters into binary states, a CSV file should be prepared for uploading into Phenetica. For more information, please check the Example_data_matrix (CSV) files in the main repository.
 
-Example format:
-```
-Fco	Fsi	Hfo	Hli	Hma	Hpa
-1	1	1	1	1	1
-0	0	0	0	0	0
-1	1	0	0	0	0
-```
+With proper preparation, the input file might look like below after opening in Notepad:
+
+
+<p align="center">
+  <img src="input.jpg" alt="Input file" width="700"/>
+</p>
+
+
+
 **Analysis Options**
 1. After uploading your CSV, please select one or multiple analyses using the provided checkboxes.
 2. Click on the **“Run selected analyses”** button to execute all chosen analyses in a single step.
