@@ -62,7 +62,7 @@ Before beginning, download the full repository from GitHub by clicking the green
 After successful installation and execution, the GUI will appear as outlined below:
 
 <p align="center">
-  <img src="Phenetica.jpg" alt="Phenetica Logo" width="700"/>
+  <img src="Phenetica_image.jpg" alt="Phenetica Logo" width="700"/>
 </p>
 
 ## Input Structure
