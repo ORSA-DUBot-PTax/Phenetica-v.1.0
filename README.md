@@ -47,7 +47,7 @@ Recommended OS: Windows 10/11
 
 Please download the EXE file from the link below, double-click, and enjoy!
 
-Download link (Google Drive): https://drive.google.com/file/d/154A28cVQbkoDNp5RVFpFCVqXAfR0gjDn/view?usp=sharing
+Download link (Google Drive): https://drive.google.com/file/d/1osJ7TEVEysDMmW74rmYXTe9yH7UWWEpr/view?usp=sharing
 
 ### **Linux**
 
