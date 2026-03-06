@@ -53,10 +53,10 @@ Alternate download link (MEGA): https://tinyurl.com/mry94h5b
 
 Before beginning, download the full repository from GitHub by clicking the green Code button and selecting Download ZIP. After the download is complete, extract the ZIP file to a location of your choice—moving it to your home directory is recommended for convenience. Once extracted, open a terminal and navigate to the project folder. From there, you can begin the setup by first installing Conda (if it’s not already installed), then creating a dedicated environment and installing the necessary dependencies by executing the commands as outlined below.
 
-1. `conda create -n phenetica python=3.9 -y && \`
-2. `conda activate phenetica && \`
-3. `conda install numpy pandas matplotlib seaborn scipy scikit-learn -y && \`
-4. `pip install umap-learn && \`
+1. `conda create -n phenetica python=3.9`
+2. `conda activate phenetica`
+3. `conda install numpy pandas matplotlib seaborn scipy scikit-learn`
+4. `pip install umap-learn`
 5. `python Phenetica_1.0.py`
 
 After successful installation and execution, the GUI will appear as outlined below:
