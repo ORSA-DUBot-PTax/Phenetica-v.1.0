@@ -1,7 +1,7 @@
 """
-Phenetica GUI (Tkinter)
+Phenetica GUI (CustomTkinter Modern Version)
 Author: Sheikh Sunzid Ahmed and M. Oliur Rahman, 2025
-Enhanced UI: Modern aesthetics and improved splash screen
+Enhanced UI: Modern aesthetics using customtkinter
 """
 
 import os
@@ -9,30 +9,36 @@ import threading
 import time
 from datetime import datetime
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+from tkinter import filedialog, messagebox
 import re
 import numpy as np
 import pandas as pd
 import matplotlib
-matplotlib.use('Agg') 
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
-from mpl_toolkits.mplot3d import Axes3D 
-
+from mpl_toolkits.mplot3d import Axes3D
 from scipy.spatial.distance import pdist, squareform
 from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
 from sklearn.decomposition import PCA
 from sklearn.manifold import MDS, TSNE
 
+# Import customtkinter for modern widgets
+import customtkinter as ctk
 
+# Set appearance and theme
+ctk.set_appearance_mode("light")  # "light", "dark", or "system"
+ctk.set_default_color_theme("green")  # themes: "blue", "green", "dark-blue"
+
+# Check for UMAP availability
 try:
     import umap
     UMAP_AVAILABLE = True
-except Exception:
+except ImportError:
     UMAP_AVAILABLE = False
 
 # ---------------------------
-# Helper functions
+# Helper functions (unchanged)
 # ---------------------------
 def timestamp():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -60,196 +66,156 @@ def get_plot_style_params(n_taxa):
     }
 
 def show_splash_screen(root, duration=3500):
-    """Enhanced splash screen that stays on top and displays properly"""
-    splash = tk.Toplevel()
-    splash.title("Phenetica 1.0")
+    """Modern splash screen using customtkinter"""
+    splash = ctk.CTkToplevel(root)
+    splash.title("")
     splash.overrideredirect(True)
-    splash_width = 520
-    splash_height = 280
+    splash_width = 540
+    splash_height = 300
     screen_width = splash.winfo_screenwidth()
     screen_height = splash.winfo_screenheight()
     x = (screen_width - splash_width) // 2
     y = (screen_height - splash_height) // 2
     splash.geometry(f"{splash_width}x{splash_height}+{x}+{y}")
-    splash.configure(bg="#2c3e50")
-    
-    # Main container with border
-    main_frame = tk.Frame(splash, bg="#ecf0f1", highlightbackground="#3498db", 
-                          highlightthickness=3)
-    main_frame.place(x=3, y=3, width=splash_width-6, height=splash_height-6)
-    
-    # Top colored bar
-    top_bar = tk.Frame(main_frame, bg="#3498db", height=8)
-    top_bar.pack(fill='x')
-    
-    # Logo/Icon
-    logo_label = tk.Label(main_frame, text="🌿", font=("Segoe UI", 52), 
-                          bg="#ecf0f1", fg="#27ae60")
-    logo_label.pack(pady=(35,5))
-    
+    splash.configure(fg_color="#2b2b2b")  # Dark background for contrast
+    splash.attributes('-topmost', True)
+
+    # Main container with rounded corners
+    main_frame = ctk.CTkFrame(splash, fg_color="#2b2b2b", corner_radius=20)
+    main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+    # Logo / icon
+    logo_label = ctk.CTkLabel(main_frame, text="🌿", font=("Segoe UI", 64), text_color="#2ecc71")
+    logo_label.pack(pady=(40, 5))
+
     # Title
-    title_label = tk.Label(main_frame, text="Phenetica 1.0", 
-                           font=("Segoe UI", 26, "bold"), 
-                           fg="#2c3e50", bg="#ecf0f1")
-    title_label.pack(pady=(0,3))
-    
+    title_label = ctk.CTkLabel(main_frame, text="Phenetica 1.0",
+                               font=("Segoe UI", 32, "bold"), text_color="white")
+    title_label.pack(pady=(0, 5))
+
     # Subtitle
-    subtitle_label = tk.Label(main_frame, text="Advanced Morphometric Analysis Suite", 
-                             font=("Segoe UI", 11), 
-                             fg="#7f8c8d", bg="#ecf0f1")
-    subtitle_label.pack(pady=(0,20))
-    
-    # Version
-    version_label = tk.Label(main_frame, text="Version 1.0", 
-                            font=("Segoe UI", 9), 
-                            fg="#95a5a6", bg="#ecf0f1")
-    version_label.pack(pady=(0,8))
-    
-    # Developers info
-    dev_frame = tk.Frame(main_frame, bg="#ecf0f1")
-    dev_frame.pack(pady=(5,0))
-    
-    dev_label = tk.Label(dev_frame, 
-                         text="Sheikh Sunzid Ahmed & M. Oliur Rahman", 
-                         font=("Segoe UI", 10, "bold"), 
-                         fg="#34495e", bg="#ecf0f1")
+    subtitle_label = ctk.CTkLabel(main_frame, text="Advanced Morphometric Analysis Suite",
+                                   font=("Segoe UI", 14), text_color="#b0b0b0")
+    subtitle_label.pack(pady=(0, 15))
+
+    # Developers
+    dev_frame = ctk.CTkFrame(main_frame, fg_color="transparent")
+    dev_frame.pack(pady=(5, 0))
+
+    dev_label = ctk.CTkLabel(dev_frame,
+                              text="Sheikh Sunzid Ahmed & M. Oliur Rahman",
+                              font=("Segoe UI", 12, "bold"), text_color="#e0e0e0")
     dev_label.pack()
-    
-    dept_label = tk.Label(dev_frame, 
-                          text="Department of Botany, University of Dhaka", 
-                          font=("Segoe UI", 9), 
-                          fg="#7f8c8d", bg="#ecf0f1")
-    dept_label.pack(pady=(2,0))
-    
-    # Progress indicator (animated dots)
-    loading_label = tk.Label(main_frame, text="Loading", 
-                            font=("Segoe UI", 9), 
-                            fg="#3498db", bg="#ecf0f1")
-    loading_label.pack(pady=(15,0))
-    
-    # Animated loading dots
+
+    dept_label = ctk.CTkLabel(dev_frame,
+                               text="Department of Botany, University of Dhaka",
+                               font=("Segoe UI", 10), text_color="#a0a0a0")
+    dept_label.pack(pady=(2, 0))
+
+    # Loading indicator
+    loading_label = ctk.CTkLabel(main_frame, text="Loading", font=("Segoe UI", 10), text_color="#3498db")
+    loading_label.pack(pady=(25, 0))
+
+    # Animated dots
     dots = [".", "..", "...", ""]
     dot_index = [0]
-    
+
     def animate_dots():
         if splash.winfo_exists():
-            loading_label.config(text=f"Loading{dots[dot_index[0]]}")
+            loading_label.configure(text=f"Loading{dots[dot_index[0]]}")
             dot_index[0] = (dot_index[0] + 1) % len(dots)
             splash.after(400, animate_dots)
-    splash.attributes('-topmost', True)
+
+    animate_dots()
     splash.lift()
     splash.focus_force()
-    splash.update()
-    animate_dots()
+
     def close_splash():
         if splash.winfo_exists():
             splash.destroy()
-    
+
     splash.after(duration, close_splash)
-    
     return splash
 
+
 class PheneticaApp:
-    def __init__(self, root):
-        self.root = root
-        
-        root.withdraw()
-        
-        splash = show_splash_screen(root, duration=3500)
-        
-        root.after(3600, lambda: self.setup_main_window())
-        
+    def __init__(self):
+        self.root = ctk.CTk()  # Main window
+        self.root.withdraw()   # Hide until splash closes
+
+        # Show splash screen
+        splash = show_splash_screen(self.root, duration=3500)
+
+        # Setup main window after splash
+        self.root.after(3600, self.setup_main_window)
+
     def setup_main_window(self):
-        """Setup the main application window"""
+        """Build the main application window with customtkinter widgets"""
         root = self.root
-        
         root.title("Phenetica 1.0 — Advanced Morphometric Analysis Suite")
-        root.geometry("900x800")
-        root.minsize(850, 750)
-        root.configure(bg="#ecf0f1")
-        
-        style = ttk.Style()
-        style.theme_use('clam')
-        
-        style.configure('TFrame', background='#ecf0f1')
-        style.configure('TLabel', background='#ecf0f1', foreground='#2c3e50', 
-                       font=('Segoe UI', 10))
-        style.configure('TLabelframe', background='#ecf0f1', foreground='#2c3e50',
-                       font=('Segoe UI', 10, 'bold'))
-        style.configure('TLabelframe.Label', background='#ecf0f1', foreground='#2c3e50',
-                       font=('Segoe UI', 10, 'bold'))
-        style.configure('TButton', font=('Segoe UI', 10), padding=6)
-        style.configure('TCheckbutton', background='#ecf0f1', foreground='#2c3e50',
-                       font=('Segoe UI', 10))
-        style.map('TCheckbutton', background=[('active', '#ecf0f1')])
-        
-        style.configure('TEntry', fieldbackground='white', foreground='#2c3c50',
-                       borderwidth=1, relief='solid')
-        style.configure('TCombobox', fieldbackground='white', foreground='#2c3c50',
-                       borderwidth=1, relief='solid')
-        
-        main_container = tk.Frame(root, bg="#ecf0f1")
-        main_container.pack(fill='both', expand=True)
-        
-        # Header frame
-        header_frame = tk.Frame(main_container, bg="#27ae60", height=70)
-        header_frame.pack(fill='x')
-        header_frame.pack_propagate(False)
+        root.geometry("1000x850")
+        root.minsize(900, 750)
 
-        header_icon = tk.Label(header_frame, text="🌿", font=("Segoe UI", 28), 
-                              bg="#27ae60", fg="white")
-        header_icon.pack(side='left', padx=(20,10), pady=10)
+        # Configure grid weights for responsive layout
+        root.grid_columnconfigure(0, weight=1)
+        root.grid_rowconfigure(2, weight=1)  # Log area expands
 
-        header_text_frame = tk.Frame(header_frame, bg="#27ae60")
-        header_text_frame.pack(side='left', pady=10)
+        # ----- Header -----
+        header_frame = ctk.CTkFrame(root, fg_color="#2ecc71", corner_radius=0, height=80)
+        header_frame.grid(row=0, column=0, sticky="ew", padx=0, pady=0)
+        header_frame.grid_columnconfigure(1, weight=1)
+        header_frame.grid_propagate(False)
 
-        header_title = tk.Label(header_text_frame, text="Phenetica 1.0", 
-                               font=("Segoe UI", 18, "bold"), 
-                               bg="#27ae60", fg="white")
-        header_title.pack(anchor='w')
-        
-        # Main content frame
-        content_frame = tk.Frame(main_container, bg="#ecf0f1")
-        content_frame.pack(fill='both', expand=True, padx=15, pady=15)
-        
-        # Top frame: File selection
-        top_frame = ttk.LabelFrame(content_frame, text="  Input Configuration  ", padding=15)
-        top_frame.pack(fill='x', pady=(0,12))
-        
-        file_frame = tk.Frame(top_frame, bg="#ecf0f1")
-        file_frame.pack(fill='x', pady=(0,10))
-        
-        ttk.Label(file_frame, text="Data Matrix File:", 
-                 font=('Segoe UI', 10, 'bold')).pack(side='left', padx=(0,10))
-        
-        self.file_entry = ttk.Entry(file_frame, width=55, font=('Segoe UI', 10))
-        self.file_entry.pack(side='left', padx=(0,10), ipady=4)
-        
-        browse_btn = tk.Button(file_frame, text="📁 Browse", command=self.browse_file,
-                              bg="#3498db", fg="white", font=('Segoe UI', 10, 'bold'),
-                              relief='flat', padx=15, pady=6, cursor='hand2',
-                              activebackground="#2980b9", activeforeground="white")
-        browse_btn.pack(side='left')
-        
-        delim_frame = tk.Frame(top_frame, bg="#ecf0f1")
-        delim_frame.pack(fill='x')
-        
-        ttk.Label(delim_frame, text="Delimiter:", 
-                 font=('Segoe UI', 10, 'bold')).pack(side='left', padx=(0,10))
-        
+        # Logo icon
+        icon_label = ctk.CTkLabel(header_frame, text="🌿", font=("Segoe UI", 40), text_color="white")
+        icon_label.grid(row=0, column=0, padx=(20, 10), pady=10)
+
+        # Title
+        title_label = ctk.CTkLabel(header_frame, text="Phenetica 1.0",
+                                    font=("Segoe UI", 22, "bold"), text_color="white")
+        title_label.grid(row=0, column=1, sticky="w", pady=10)
+
+        # ----- Main Content Frame -----
+        content_frame = ctk.CTkFrame(root, fg_color="transparent")
+        content_frame.grid(row=1, column=0, sticky="nsew", padx=20, pady=20)
+        content_frame.grid_columnconfigure(0, weight=1)
+
+        # ----- Input File Section -----
+        input_frame = ctk.CTkFrame(content_frame, corner_radius=15)
+        input_frame.grid(row=0, column=0, sticky="ew", pady=(0, 15))
+        input_frame.grid_columnconfigure(1, weight=1)
+
+        # File selection
+        file_label = ctk.CTkLabel(input_frame, text="Data Matrix File:", font=("Segoe UI", 12, "bold"))
+        file_label.grid(row=0, column=0, padx=(20, 10), pady=(20, 10), sticky="w")
+
+        self.file_entry = ctk.CTkEntry(input_frame, placeholder_text="Select input file...", width=400)
+        self.file_entry.grid(row=0, column=1, padx=(0, 10), pady=(20, 10), sticky="ew")
+
+        browse_btn = ctk.CTkButton(input_frame, text="Browse", command=self.browse_file,
+                                    width=100, fg_color="#3498db", hover_color="#2980b9")
+        browse_btn.grid(row=0, column=2, padx=(0, 20), pady=(20, 10))
+
+        # Delimiter selection
+        delim_label = ctk.CTkLabel(input_frame, text="Delimiter:", font=("Segoe UI", 12, "bold"))
+        delim_label.grid(row=1, column=0, padx=(20, 10), pady=(0, 20), sticky="w")
+
         self.delim_var = tk.StringVar(value="auto")
-        delim_combo = ttk.Combobox(delim_frame, textvariable=self.delim_var, 
-                                   values=["auto", "\\t", ","], width=15, 
-                                   state='readonly', font=('Segoe UI', 10))
-        delim_combo.pack(side='left', ipady=3)
-        
-        ttk.Label(delim_frame, text="(auto-detect, tab, or comma)", 
-                 font=('Segoe UI', 9), foreground='#7f8c8d').pack(side='left', padx=(10,0))
-        
-        # Analysis selection frame
-        analysis_frame = ttk.LabelFrame(content_frame, text="  Select Analyses  ", padding=15)
-        analysis_frame.pack(fill='x', pady=(0,12))
-        
+        delim_combo = ctk.CTkComboBox(input_frame, variable=self.delim_var,
+                                       values=["auto", "\\t", ","],
+                                       state="readonly", width=150)
+        delim_combo.grid(row=1, column=1, padx=(0, 10), pady=(0, 20), sticky="w")
+
+        delim_hint = ctk.CTkLabel(input_frame, text="(auto-detect, tab, or comma)",
+                                   font=("Segoe UI", 10), text_color="gray")
+        delim_hint.grid(row=1, column=2, padx=(0, 20), pady=(0, 20), sticky="w")
+
+        # ----- Analyses Selection Section -----
+        analysis_frame = ctk.CTkFrame(content_frame, corner_radius=15)
+        analysis_frame.grid(row=1, column=0, sticky="ew", pady=(0, 15))
+        analysis_frame.grid_columnconfigure(0, weight=1)
+        analysis_frame.grid_columnconfigure(1, weight=1)
+
         self.chk_vars = {}
         options = [
             ("📊 Similarity Matrices (SMC + Jaccard)", "similarity", True),
@@ -260,101 +226,93 @@ class PheneticaApp:
             ("🗺️ UMAP (2D + 3D) — optional", "umap", False),
             ("🎨 t-SNE (2D + 3D) — optional", "tsne", False)
         ]
-        
+
+        # Place checkboxes in two columns
         for i, (label, key, default) in enumerate(options):
             var = tk.BooleanVar(value=default)
             self.chk_vars[key] = var
-            
-            chk_frame = tk.Frame(analysis_frame, bg="#ecf0f1")
-            chk_frame.grid(row=i//2, column=i%2, sticky='w', padx=15, pady=6)
-            
-            chk = ttk.Checkbutton(chk_frame, text=label, variable=var)
-            chk.pack(anchor='w')
-        
-        control_frame = tk.Frame(content_frame, bg="#ecf0f1")
-        control_frame.pack(fill='x', pady=(0,12))
-        
-        self.run_btn = tk.Button(control_frame, text="▶ Run Selected Analyses", 
-                                command=self.run_clicked,
-                                bg="#27ae60", fg="white", 
-                                font=('Segoe UI', 12, 'bold'),
-                                relief='flat', padx=25, pady=10, cursor='hand2',
-                                activebackground="#229954", activeforeground="white")
-        self.run_btn.pack(side='left', padx=(0,15))
-        
-        style.configure("Custom.Horizontal.TProgressbar", 
-                       troughcolor='#bdc3c7', 
-                       background='#27ae60',
-                       borderwidth=0,
-                       thickness=20)
-        
-        self.progress = ttk.Progressbar(control_frame, orient='horizontal', 
-                                       mode='determinate', length=500,
-                                       style="Custom.Horizontal.TProgressbar")
-        self.progress.pack(side='left', fill='x', expand=True)
-        
-        log_frame = ttk.LabelFrame(content_frame, text="  Analysis Log  ", padding=10)
-        log_frame.pack(fill='both', expand=True, pady=(0,10))
-        
-        log_container = tk.Frame(log_frame, bg="white")
-        log_container.pack(fill='both', expand=True)
-        
-        scrollbar = tk.Scrollbar(log_container)
-        scrollbar.pack(side='right', fill='y')
-        
-        self.log_text = tk.Text(log_container, height=14, state='disabled', wrap='word',
-                               bg='#2c3e50', fg='#ecf0f1', font=('Consolas', 9),
-                               relief='flat', padx=10, pady=10,
-                               yscrollcommand=scrollbar.set)
-        self.log_text.pack(side='left', fill='both', expand=True)
-        scrollbar.config(command=self.log_text.yview)
-        
-        footer_frame = tk.Frame(main_container, bg="#34495e", height=65)
-        footer_frame.pack(side='bottom', fill='x')
-        footer_frame.pack_propagate(False)
-        
-        top_border = tk.Frame(footer_frame, bg="#3498db", height=2)
-        top_border.pack(fill='x')
-        
-        footer_content = tk.Frame(footer_frame, bg="#34495e")
+            chk = ctk.CTkCheckBox(analysis_frame, text=label, variable=var,
+                                   font=("Segoe UI", 11))
+            chk.grid(row=i//2, column=i%2, padx=20, pady=8, sticky="w")
+
+        # ----- Control Buttons & Progress -----
+        control_frame = ctk.CTkFrame(content_frame, fg_color="transparent")
+        control_frame.grid(row=2, column=0, sticky="ew", pady=(0, 15))
+        control_frame.grid_columnconfigure(1, weight=1)
+
+        self.run_btn = ctk.CTkButton(control_frame, text="▶ Run Selected Analyses",
+                                      command=self.run_clicked,
+                                      fg_color="#27ae60", hover_color="#2ecc71",
+                                      font=("Segoe UI", 14, "bold"), height=40,
+                                      corner_radius=10)
+        self.run_btn.grid(row=0, column=0, padx=(0, 20), sticky="w")
+
+        self.progress = ctk.CTkProgressBar(control_frame, width=400, height=15,
+                                           corner_radius=7, border_width=0,
+                                           progress_color="#27ae60")
+        self.progress.grid(row=0, column=1, padx=(0, 20), sticky="ew")
+        self.progress.set(0)  # initial value
+
+        # ----- Log Area -----
+        log_frame = ctk.CTkFrame(content_frame, corner_radius=15)
+        log_frame.grid(row=3, column=0, sticky="nsew", pady=(0, 10))
+        log_frame.grid_rowconfigure(0, weight=1)
+        log_frame.grid_columnconfigure(0, weight=1)
+
+        self.log_text = ctk.CTkTextbox(log_frame, font=("Consolas", 10),
+                                       fg_color="#2b2b2b", text_color="#f0f0f0",
+                                       corner_radius=10, border_width=1,
+                                       border_color="#444")
+        self.log_text.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+
+        # ----- Footer -----
+        footer_frame = ctk.CTkFrame(root, fg_color="#34495e", corner_radius=0, height=80)
+        footer_frame.grid(row=3, column=0, sticky="ew")
+        footer_frame.grid_columnconfigure(0, weight=1)
+        footer_frame.grid_propagate(False)
+
+        # Top thin border
+        top_border = ctk.CTkFrame(footer_frame, fg_color="#3498db", height=3, corner_radius=0)
+        top_border.pack(fill="x")
+
+        # Footer content
+        footer_content = ctk.CTkFrame(footer_frame, fg_color="transparent")
         footer_content.pack(expand=True, pady=8)
-        
-        developed_label = tk.Label(footer_content, 
-                                   text="Developed by", 
-                                   font=("Times New Roman", 9), 
-                                   fg="#95a5a6", bg="#34495e")
+
+        developed_label = ctk.CTkLabel(footer_content,
+                                        text="Developed by",
+                                        font=("Times New Roman", 9),
+                                        text_color="#95a5a6")
         developed_label.pack()
-        
-        authors_label = tk.Label(footer_content, 
-                                text="Sheikh Sunzid Ahmed and M. Oliur Rahman", 
-                                font=("Times New Roman", 10, "bold"), 
-                                fg="#ecf0f1", bg="#34495e")
-        authors_label.pack(pady=(2,4))
-        
-        affiliation_label = tk.Label(footer_content, 
-                                     text="Department of Botany, University of Dhaka", 
-                                     font=("Times New Roman", 11), 
-                                     fg="#bdc3c7", bg="#34495e")
+
+        authors_label = ctk.CTkLabel(footer_content,
+                                      text="Sheikh Sunzid Ahmed and M. Oliur Rahman",
+                                      font=("Times New Roman", 11, "bold"),
+                                      text_color="#ecf0f1")
+        authors_label.pack(pady=(2, 4))
+
+        affiliation_label = ctk.CTkLabel(footer_content,
+                                          text="Department of Botany, University of Dhaka",
+                                          font=("Times New Roman", 10),
+                                          text_color="#bdc3c7")
         affiliation_label.pack()
-        
-        copyright_label = tk.Label(footer_content, 
-                                   text="© 2024 | All Rights Reserved", 
-                                   font=("Times New Roman", 9), 
-                                   fg="#7f8c8d", bg="#34495e")
-        copyright_label.pack(pady=(3,0))
-        
+
+        copyright_label = ctk.CTkLabel(footer_content,
+                                        text="© 2025 | All Rights Reserved",
+                                        font=("Times New Roman", 9),
+                                        text_color="#7f8c8d")
+        copyright_label.pack(pady=(3, 0))
+
+        # Initialize variables
         self.input_path = None
         self.outputs_dir = os.path.join(os.getcwd(), "outputs")
-        
-        main_container.columnconfigure(0, weight=1)
-        main_container.rowconfigure(1, weight=1)
-        content_frame.columnconfigure(0, weight=1)
-        content_frame.rowconfigure(3, weight=1)
-        
-        root.deiconify()
-        root.lift()
-        root.focus_force()
-        
+
+        # Show main window
+        self.root.deiconify()
+        self.root.lift()
+        self.root.focus_force()
+
+        # Initial log message
         self.log("═" * 80)
         self.log("Welcome to Phenetica 1.0")
         self.log("Advanced Morphometric Analysis Suite")
@@ -364,45 +322,47 @@ class PheneticaApp:
         self.log("")
 
     def log(self, message):
+        """Append message to log textbox with timestamp"""
         t = timestamp()
         if message.startswith("═") or message.startswith("Advanced"):
             full = f"{message}\n"
         else:
             full = f"[{t}] {message}\n"
-        self.log_text.configure(state='normal')
-        self.log_text.insert('end', full)
-        self.log_text.see('end')
-        self.log_text.configure(state='disabled')
+        self.log_text.insert("end", full)
+        self.log_text.see("end")
+        # Also print to console for debugging
         print(full, end='')
 
     def browse_file(self):
+        """Open file dialog and set entry"""
         path = filedialog.askopenfilename(
             title="Select Data Matrix File",
-            filetypes=[("CSV/TSV files", "*.csv *.tsv *.txt"), 
-                      ("All files", "*.*")]
+            filetypes=[("CSV/TSV files", "*.csv *.tsv *.txt"), ("All files", "*.*")]
         )
         if path:
-            self.file_entry.delete(0, 'end')
+            self.file_entry.delete(0, "end")
             self.file_entry.insert(0, path)
             self.input_path = path
             self.log(f"File selected: {os.path.basename(path)}")
 
     def run_clicked(self):
+        """Start analysis in a separate thread"""
         path = self.file_entry.get().strip()
         if not path or not os.path.isfile(path):
-            messagebox.showerror("Input Required", 
-                               "Please select a valid input file first.",
-                               parent=self.root)
+            messagebox.showerror("Input Required",
+                                 "Please select a valid input file first.",
+                                 parent=self.root)
             return
 
         os.makedirs(self.outputs_dir, exist_ok=True)
-        self.run_btn.configure(state='disabled', bg='#95a5a6')
-        self.progress['value'] = 0
+        self.run_btn.configure(state="disabled", fg_color="#95a5a6")
+        self.progress.set(0)
         self.log("═" * 80)
         thread = threading.Thread(target=self.execute_pipeline, args=(path,))
         thread.start()
 
     def execute_pipeline(self, path):
+        """Core analysis pipeline (unchanged logic)"""
         try:
             self.log("Starting analyses pipeline...")
             delim_choice = self.delim_var.get()
@@ -418,35 +378,29 @@ class PheneticaApp:
                 df = pd.read_csv(path, sep=sep, index_col=0)
 
             df = df.fillna(0)
-            
-            # ROBUST DATA ORIENTATION DETECTION
-            # Goal: produce 'data' as taxa × characters (rows=taxa, cols=characters)
+
+            # Robust data orientation detection
             index_names = [str(i) for i in df.index]
             col_names = [str(c) for c in df.columns]
 
             def looks_like_chars(names):
-                # common patterns for character labels like Ch1, ch2, Character1, Char_1
                 count = sum(1 for n in names if re.match(r'^(Ch|ch|Char|char|Character|character)\b|\bCh\d+', n))
-                return count >= max(1, int(len(names) * 0.3))  # >=30% match threshold
+                return count >= max(1, int(len(names) * 0.3))
 
-            # First prefer explicit label detection
             index_has_char_labels = any(re.match(r'^(Ch|ch|Char|char|Character|character)\b', n) or re.match(r'^Ch\d+', n) for n in index_names)
             cols_have_char_labels = any(re.match(r'^(Ch|ch|Char|char|Character|character)\b', n) or re.match(r'^Ch\d+', n) for n in col_names)
 
             if index_has_char_labels and not cols_have_char_labels:
-                # rows look like characters (Ch...), so transpose to taxa x characters
                 data = df.T
                 taxa = list(data.index)
                 characters = list(data.columns)
                 self.log("✓ Data interpreted by label-detection: Characters × Taxa (transposed to Taxa × Characters)")
             elif cols_have_char_labels and not index_has_char_labels:
-                # columns look like characters, data already taxa x characters
                 data = df
                 taxa = list(data.index)
                 characters = list(data.columns)
                 self.log("✓ Data interpreted by label-detection: Taxa × Characters (direct use)")
             else:
-                # Fallback: use shape heuristic: if fewer rows than columns assume rows are characters -> transpose
                 if df.shape[0] < df.shape[1]:
                     data = df.T
                     taxa = list(data.index)
@@ -458,23 +412,20 @@ class PheneticaApp:
                     characters = list(data.columns)
                     self.log("✓ Data interpreted by shape-fallback: Taxa × Characters (direct use)")
 
-            # Ensure all data is numeric
             data = data.apply(pd.to_numeric, errors='coerce').fillna(0)
-            
             self.log(f"✓ Input read: {os.path.basename(path)}")
             self.log(f"  Final data shape: {data.shape} (taxa × characters)")
             self.log(f"  Taxa count: {len(taxa)}")
             self.log(f"  Character count: {len(characters)}")
             self.log("")
-            
+
             plot_params = get_plot_style_params(len(taxa))
             scatter_size = plot_params['scatter_fig_size']
             scatter_font = plot_params['scatter_font_size']
             dendro_size = plot_params['dendro_fig_size']
             dendro_font = plot_params['dendro_leaf_font_size']
             heatmap_size = plot_params['heatmap_fig_size']
-            
-            # Use the properly oriented data (taxa × characters)
+
             binary = data.values
 
             steps = []
@@ -516,26 +467,21 @@ class PheneticaApp:
                 sim_smc_df = pd.DataFrame(sim_smc, index=taxa, columns=taxa)
 
             completed += 1
-            self.progress['value'] = (completed/total) * 100
+            self.progress.set(completed / total)
 
-            # 2) Hierarchical Clustering Dendrograms (using SMC similarity)
+            # 2) Hierarchical Clustering Dendrograms
             if 'clustering' in steps:
                 self.log("─" * 80)
                 self.log("Generating hierarchical clustering dendrograms based on SMC similarity...")
-                
-                # Convert similarity to distance for scipy linkage
-                dist_matrix_condensed = squareform(1 - sim_smc)  # Convert similarity to distance
-                
+                dist_matrix_condensed = squareform(1 - sim_smc)
                 methods = [
                     ('single', 'Single Linkage (Nearest Neighbor)'),
                     ('complete', 'Complete Linkage (Furthest Neighbor)'),
                     ('average', 'Average Linkage (UPGMA)'),
                     ('ward', 'Ward Linkage')
                 ]
-                
                 for method, method_name in methods:
                     try:
-                        # Ward uses Euclidean distance, others use SMC-based distance
                         if method == 'ward':
                             dist_input = pdist(binary, metric='euclidean')
                             ylabel = 'Euclidean Distance'
@@ -544,41 +490,33 @@ class PheneticaApp:
                             dist_input = dist_matrix_condensed
                             ylabel = 'SMC Similarity'
                             convert_to_similarity = True
-                        
+
                         link_mat = linkage(dist_input, method=method)
-                        
                         fig, ax = plt.subplots(figsize=dendro_size)
-                        dendrogram(link_mat, labels=taxa, leaf_rotation=90, 
-                                  leaf_font_size=dendro_font, ax=ax)
-                        
-                        # Convert Y-axis to similarity for non-Ward methods
+                        dendrogram(link_mat, labels=taxa, leaf_rotation=90,
+                                   leaf_font_size=dendro_font, ax=ax)
+
                         if convert_to_similarity:
                             y_ticks = ax.get_yticks()
-                            # Convert distance back to similarity: similarity = 1 - distance
-                            ax.set_yticklabels([f'{1-y:.3f}' if 0 <= y <= 1 else f'{1-y:.2f}' 
-                                               for y in y_ticks])
-                        
+                            ax.set_yticklabels([f'{1-y:.3f}' if 0 <= y <= 1 else f'{1-y:.2f}'
+                                                for y in y_ticks])
+
                         ax.set_ylabel(ylabel, fontsize=11, fontweight='bold')
                         ax.set_xlabel('Taxa', fontsize=11, fontweight='bold')
                         ax.set_title(f"{method_name} Dendrogram", fontsize=12, fontweight='bold')
-                        
                         plt.tight_layout()
                         outname = os.path.join(self.outputs_dir, f"dendrogram_{method}.png")
                         fig.savefig(outname, dpi=300)
                         plt.close(fig)
                         self.log(f"✓ Saved {method_name} dendrogram → {os.path.basename(outname)}")
-                        
-                        # Store average linkage for cluster analysis
                         if method == 'average':
                             linkage_matrix_upgma = link_mat
-                            
                     except Exception as e:
                         self.log(f"✗ Failed {method_name} dendrogram: {e}")
-                
+
                 completed += 1
-                self.progress['value'] = (completed/total) * 100
+                self.progress.set(completed / total)
             else:
-                # Create linkage matrix anyway for potential cluster analysis
                 dist_matrix_condensed = squareform(1 - sim_smc)
                 linkage_matrix_upgma = linkage(dist_matrix_condensed, method='average')
 
@@ -615,10 +553,10 @@ class PheneticaApp:
 
                 # PCA 2D
                 fig = plt.figure(figsize=scatter_size)
-                plt.scatter(pca_result[:,0], pca_result[:,1], s=60, c='#e74c3c', 
-                           alpha=0.7, edgecolors='black', linewidth=0.5)
+                plt.scatter(pca_result[:,0], pca_result[:,1], s=60, c='#e74c3c',
+                            alpha=0.7, edgecolors='black', linewidth=0.5)
                 for i, txt in enumerate(taxa):
-                    plt.text(pca_result[i,0], pca_result[i,1], txt, fontsize=scatter_font) 
+                    plt.text(pca_result[i,0], pca_result[i,1], txt, fontsize=scatter_font)
                 plt.xlabel(f"PC1 ({explained_var[0]:.2f}%)")
                 plt.ylabel(f"PC2 ({explained_var[1]:.2f}%)")
                 plt.title("PCA 2D Scatter Plot")
@@ -633,11 +571,11 @@ class PheneticaApp:
                     try:
                         fig = plt.figure(figsize=scatter_size)
                         ax = fig.add_subplot(111, projection='3d')
-                        ax.scatter(pca_result[:,0], pca_result[:,1], pca_result[:,2], 
-                                  s=60, c='#e74c3c', alpha=0.7, edgecolors='black', linewidth=0.5)
+                        ax.scatter(pca_result[:,0], pca_result[:,1], pca_result[:,2],
+                                   s=60, c='#e74c3c', alpha=0.7, edgecolors='black', linewidth=0.5)
                         for i, txt in enumerate(taxa):
-                            ax.text(pca_result[i,0], pca_result[i,1], pca_result[i,2], 
-                                   txt, fontsize=scatter_font) 
+                            ax.text(pca_result[i,0], pca_result[i,1], pca_result[i,2],
+                                    txt, fontsize=scatter_font)
                         ax.set_xlabel(f"PC1 ({explained_var[0]:.2f}%)")
                         ax.set_ylabel(f"PC2 ({explained_var[1]:.2f}%)")
                         ax.set_zlabel(f"PC3 ({explained_var[2]:.2f}%)")
@@ -660,24 +598,22 @@ class PheneticaApp:
                 self.log(f"✓ Saved PCA character loadings → {os.path.basename(out_load)}")
 
             completed += 1
-            self.progress['value'] = (completed/total) * 100
+            self.progress.set(completed / total)
 
-            # 4) NMDS (2D + 3D)
+            # 4) NMDS
             if 'nmds' in steps:
                 self.log("─" * 80)
                 self.log("Running Non-metric Multidimensional Scaling (NMDS)...")
                 try:
-                    # Use dissimilarity matrix (1 - similarity)
                     dissim_matrix = 1 - sim_smc
-                    
                     n_dims_max = min(6, len(taxa))
                     stress_vals = []
                     for d in range(1, n_dims_max+1):
-                        nmds = MDS(n_components=d, dissimilarity='precomputed', 
-                                  random_state=42, n_init=10)
+                        nmds = MDS(n_components=d, dissimilarity='precomputed',
+                                   random_state=42, n_init=10)
                         nmds.fit(dissim_matrix)
                         stress_vals.append(nmds.stress_)
-                    
+
                     fig = plt.figure(figsize=(6,5))
                     plt.plot(range(1, n_dims_max+1), stress_vals, marker='o')
                     plt.xlabel("Number of Dimensions")
@@ -690,37 +626,37 @@ class PheneticaApp:
                     self.log(f"✓ Saved NMDS Stress plot → {os.path.basename(out_stress)}")
 
                     # NMDS 2D
-                    nmds2 = MDS(n_components=2, dissimilarity='precomputed', 
-                               random_state=42, n_init=10)
+                    nmds2 = MDS(n_components=2, dissimilarity='precomputed',
+                                random_state=42, n_init=10)
                     nmds_2d = nmds2.fit_transform(dissim_matrix)
                     stress2 = nmds2.stress_
-                    out_nmds2 = os.path.join(self.outputs_dir, "nmds_2d_plot.png")
-                    fig = plt.figure(figsize=scatter_size) 
-                    plt.scatter(nmds_2d[:,0], nmds_2d[:,1], s=60, c='#3498db', 
-                               alpha=0.7, edgecolors='black', linewidth=0.5)
+                    fig = plt.figure(figsize=scatter_size)
+                    plt.scatter(nmds_2d[:,0], nmds_2d[:,1], s=60, c='#3498db',
+                                alpha=0.7, edgecolors='black', linewidth=0.5)
                     for i, txt in enumerate(taxa):
                         plt.text(nmds_2d[i,0], nmds_2d[i,1], txt, fontsize=scatter_font)
                     plt.xlabel("NMDS1")
                     plt.ylabel("NMDS2")
                     plt.title(f"NMDS 2D Scatter Plot (Stress={stress2:.4f})")
                     plt.tight_layout()
+                    out_nmds2 = os.path.join(self.outputs_dir, "nmds_2d_plot.png")
                     fig.savefig(out_nmds2, dpi=300)
                     plt.close(fig)
                     self.log(f"✓ Saved NMDS 2D plot → {os.path.basename(out_nmds2)} (Stress={stress2:.4f})")
 
                     # NMDS 3D
                     if len(taxa) >= 3:
-                        nmds3d = MDS(n_components=3, dissimilarity='precomputed', 
-                                    random_state=42, n_init=10)
+                        nmds3d = MDS(n_components=3, dissimilarity='precomputed',
+                                     random_state=42, n_init=10)
                         nmds_3d = nmds3d.fit_transform(dissim_matrix)
                         stress3 = nmds3d.stress_
                         fig = plt.figure(figsize=scatter_size)
                         ax = fig.add_subplot(111, projection='3d')
-                        ax.scatter(nmds_3d[:,0], nmds_3d[:,1], nmds_3d[:,2], 
-                                  s=60, c='#3498db', alpha=0.7, edgecolors='black', linewidth=0.5)
+                        ax.scatter(nmds_3d[:,0], nmds_3d[:,1], nmds_3d[:,2],
+                                   s=60, c='#3498db', alpha=0.7, edgecolors='black', linewidth=0.5)
                         for i, txt in enumerate(taxa):
-                            ax.text(nmds_3d[i,0], nmds_3d[i,1], nmds_3d[i,2], 
-                                   txt, fontsize=scatter_font)
+                            ax.text(nmds_3d[i,0], nmds_3d[i,1], nmds_3d[i,2],
+                                    txt, fontsize=scatter_font)
                         ax.set_xlabel("NMDS1")
                         ax.set_ylabel("NMDS2")
                         ax.set_zlabel("NMDS3")
@@ -735,24 +671,24 @@ class PheneticaApp:
                 except Exception as e:
                     self.log(f"✗ NMDS failed: {e}")
             completed += 1
-            self.progress['value'] = (completed/total) * 100
+            self.progress.set(completed / total)
 
-            # 5) Heatmap of SMC similarity
+            # 5) Heatmap
             if 'heatmap' in steps:
                 self.log("─" * 80)
                 self.log("Creating similarity heatmap (SMC)...")
                 try:
-                    fig = plt.figure(figsize=heatmap_size) 
+                    fig = plt.figure(figsize=heatmap_size)
                     annot_bool = scatter_font > 5 and len(taxa) <= 30
                     annot_kws = {"fontsize": scatter_font * 1.2} if annot_bool else {}
                     sns.heatmap(
-                        sim_smc_df, 
-                        cmap='YlGnBu', 
-                        annot=annot_bool, 
+                        sim_smc_df,
+                        cmap='YlGnBu',
+                        annot=annot_bool,
                         square=False,
-                        cbar_kws={'label':'Similarity', 'shrink':0.65},
+                        cbar_kws={'label': 'Similarity', 'shrink': 0.65},
                         annot_kws=annot_kws,
-                        xticklabels=True, 
+                        xticklabels=True,
                         yticklabels=True,
                         linewidths=0.3,
                         linecolor='gray'
@@ -768,24 +704,24 @@ class PheneticaApp:
                 except Exception as e:
                     self.log(f"✗ Heatmap generation failed: {e}")
             completed += 1
-            self.progress['value'] = (completed/total) * 100
+            self.progress.set(completed / total)
 
-            # 6) UMAP (optional) - 2D and 3D
+            # 6) UMAP
             if 'umap' in steps:
                 if UMAP_AVAILABLE:
                     self.log("─" * 80)
                     self.log("Running UMAP (2D + 3D)...")
                     try:
                         # UMAP 2D
-                        umap_2d = umap.UMAP(n_neighbors=min(5, len(taxa)-1), 
-                                           min_dist=0.1, random_state=42, n_components=2)
+                        umap_2d = umap.UMAP(n_neighbors=min(5, len(taxa)-1),
+                                             min_dist=0.1, random_state=42, n_components=2)
                         umap_result_2d = umap_2d.fit_transform(binary)
                         fig = plt.figure(figsize=scatter_size)
-                        plt.scatter(umap_result_2d[:,0], umap_result_2d[:,1], 
-                                   s=60, c='#9b59b6', alpha=0.7, edgecolors='black', linewidth=0.5)
+                        plt.scatter(umap_result_2d[:,0], umap_result_2d[:,1],
+                                    s=60, c='#9b59b6', alpha=0.7, edgecolors='black', linewidth=0.5)
                         for i, txt in enumerate(taxa):
-                            plt.text(umap_result_2d[i,0], umap_result_2d[i,1], 
-                                    txt, fontsize=scatter_font)
+                            plt.text(umap_result_2d[i,0], umap_result_2d[i,1],
+                                     txt, fontsize=scatter_font)
                         plt.xlabel("UMAP1")
                         plt.ylabel("UMAP2")
                         plt.title("UMAP 2D Scatter Plot")
@@ -794,21 +730,21 @@ class PheneticaApp:
                         fig.savefig(out_umap2d, dpi=300)
                         plt.close(fig)
                         self.log(f"✓ Saved UMAP 2D plot → {os.path.basename(out_umap2d)}")
-                        
+
                         # UMAP 3D
                         if len(taxa) >= 3:
                             try:
-                                umap_3d = umap.UMAP(n_neighbors=min(5, len(taxa)-1), 
-                                                   min_dist=0.1, random_state=42, n_components=3)
+                                umap_3d = umap.UMAP(n_neighbors=min(5, len(taxa)-1),
+                                                     min_dist=0.1, random_state=42, n_components=3)
                                 umap_result_3d = umap_3d.fit_transform(binary)
                                 fig = plt.figure(figsize=scatter_size)
                                 ax = fig.add_subplot(111, projection='3d')
-                                ax.scatter(umap_result_3d[:,0], umap_result_3d[:,1], 
-                                          umap_result_3d[:,2], s=60, c='#9b59b6', 
+                                ax.scatter(umap_result_3d[:,0], umap_result_3d[:,1],
+                                          umap_result_3d[:,2], s=60, c='#9b59b6',
                                           alpha=0.7, edgecolors='black', linewidth=0.5)
                                 for i, txt in enumerate(taxa):
-                                    ax.text(umap_result_3d[i,0], umap_result_3d[i,1], 
-                                           umap_result_3d[i,2], txt, fontsize=scatter_font)
+                                    ax.text(umap_result_3d[i,0], umap_result_3d[i,1],
+                                            umap_result_3d[i,2], txt, fontsize=scatter_font)
                                 ax.set_xlabel("UMAP1")
                                 ax.set_ylabel("UMAP2")
                                 ax.set_zlabel("UMAP3")
@@ -827,23 +763,22 @@ class PheneticaApp:
                 else:
                     self.log("⚠ UMAP was requested but unavailable (package not installed)")
             completed += 1
-            self.progress['value'] = (completed/total) * 100
+            self.progress.set(completed / total)
 
-            # 7) t-SNE (optional) - 2D and 3D
+            # 7) t-SNE
             if 'tsne' in steps:
                 self.log("─" * 80)
                 self.log("Running t-SNE (2D + 3D)...")
                 try:
-                    # t-SNE 2D
                     perplexity_val = min(30, len(taxa)-1)
                     tsne_2d = TSNE(n_components=2, random_state=42, perplexity=perplexity_val)
                     tsne_result_2d = tsne_2d.fit_transform(binary)
                     fig = plt.figure(figsize=scatter_size)
-                    plt.scatter(tsne_result_2d[:,0], tsne_result_2d[:,1], 
-                               s=60, c='#e67e22', alpha=0.7, edgecolors='black', linewidth=0.5)
+                    plt.scatter(tsne_result_2d[:,0], tsne_result_2d[:,1],
+                                s=60, c='#e67e22', alpha=0.7, edgecolors='black', linewidth=0.5)
                     for i, txt in enumerate(taxa):
-                        plt.text(tsne_result_2d[i,0], tsne_result_2d[i,1], 
-                                txt, fontsize=scatter_font)
+                        plt.text(tsne_result_2d[i,0], tsne_result_2d[i,1],
+                                 txt, fontsize=scatter_font)
                     plt.xlabel("t-SNE1")
                     plt.ylabel("t-SNE2")
                     plt.title("t-SNE 2D Scatter Plot")
@@ -852,21 +787,21 @@ class PheneticaApp:
                     fig.savefig(out_tsne2d, dpi=300)
                     plt.close(fig)
                     self.log(f"✓ Saved t-SNE 2D plot → {os.path.basename(out_tsne2d)}")
-                    
+
                     # t-SNE 3D
                     if len(taxa) >= 3:
                         try:
-                            tsne_3d = TSNE(n_components=3, random_state=42, 
-                                          perplexity=perplexity_val)
+                            tsne_3d = TSNE(n_components=3, random_state=42,
+                                           perplexity=perplexity_val)
                             tsne_result_3d = tsne_3d.fit_transform(binary)
                             fig = plt.figure(figsize=scatter_size)
                             ax = fig.add_subplot(111, projection='3d')
-                            ax.scatter(tsne_result_3d[:,0], tsne_result_3d[:,1], 
-                                      tsne_result_3d[:,2], s=60, c='#e67e22', 
+                            ax.scatter(tsne_result_3d[:,0], tsne_result_3d[:,1],
+                                      tsne_result_3d[:,2], s=60, c='#e67e22',
                                       alpha=0.7, edgecolors='black', linewidth=0.5)
                             for i, txt in enumerate(taxa):
-                                ax.text(tsne_result_3d[i,0], tsne_result_3d[i,1], 
-                                       tsne_result_3d[i,2], txt, fontsize=scatter_font)
+                                ax.text(tsne_result_3d[i,0], tsne_result_3d[i,1],
+                                        tsne_result_3d[i,2], txt, fontsize=scatter_font)
                             ax.set_xlabel("t-SNE1")
                             ax.set_ylabel("t-SNE2")
                             ax.set_zlabel("t-SNE3")
@@ -883,9 +818,9 @@ class PheneticaApp:
                 except Exception as e:
                     self.log(f"✗ t-SNE failed: {e}")
             completed += 1
-            self.progress['value'] = (completed/total) * 100
+            self.progress.set(completed / total)
 
-            # Generate cluster summary
+            # Cluster summary
             try:
                 clusters = fcluster(linkage_matrix_upgma, t=0.2, criterion='distance')
                 cluster_table = pd.DataFrame({'Taxa': taxa, 'Cluster': clusters})
@@ -906,10 +841,10 @@ class PheneticaApp:
             self.log(f"✗ Pipeline error: {e}")
             self.log("═" * 80)
         finally:
-            self.run_btn.configure(state='normal', bg='#27ae60')
-            self.progress['value'] = 100
+            self.run_btn.configure(state="normal", fg_color="#27ae60")
+            self.progress.set(1.0)
+
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = PheneticaApp(root)
-    root.mainloop()
+    app = PheneticaApp()
+    app.root.mainloop()
