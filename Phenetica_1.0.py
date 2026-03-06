@@ -94,7 +94,7 @@ def show_splash_screen(root, duration=3500):
     title_label.pack(pady=(0, 5))
 
     # Subtitle
-    subtitle_label = ctk.CTkLabel(main_frame, text="Advanced Morphometric Analysis Suite",
+    subtitle_label = ctk.CTkLabel(main_frame, text="Advanced Morphometric and Phenetic Analyses Suite",
                                    font=("Segoe UI", 14), text_color="#b0b0b0")
     subtitle_label.pack(pady=(0, 15))
 
@@ -152,7 +152,7 @@ class PheneticaApp:
     def setup_main_window(self):
         """Build the main application window with customtkinter widgets"""
         root = self.root
-        root.title("Phenetica 1.0 — Advanced Morphometric Analysis Suite")
+        root.title("Phenetica 1.0 — Advanced Morphometric and Phenetic Analyses Suite")
         root.geometry("1000x850")
         root.minsize(900, 750)
 
@@ -315,7 +315,7 @@ class PheneticaApp:
         # Initial log message
         self.log("═" * 80)
         self.log("Welcome to Phenetica 1.0")
-        self.log("Advanced Morphometric Analysis Suite")
+        self.log("Advanced Morphometric and Phenetic Analyses Suite")
         self.log("═" * 80)
         self.log("Ready to perform morphometric analyses.")
         self.log("Please select your input data file to begin.")
