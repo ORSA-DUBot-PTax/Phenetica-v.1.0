@@ -1,4 +1,4 @@
-# **Phenetica v.1.0**
+# **PHENETICA 1.0: AN OPEN-ACCESS SOFTWARE FOR NUMERICAL TAXONOMY WITH A CASE STUDY IN STERCULIOIDEAE (MALVACEAE)**
 Phenetica is a powerful, cross-platform, standalone desktop application designed for comprehensive morphometric analysis of biological data using binary character traits. Built with modern Python technologies, Phenetica provides taxonomists and researchers with an intuitive graphical interface for performing advanced statistical analyses without the need for programming knowledge.
 
 ## **Why Phenetica?**
